@@ -25,6 +25,8 @@ using static System.Net.Mime.MediaTypeNames;
 using static Printer.BaseLogRecord;
 using System.Windows.Media.Media3D;
 using System.Drawing.Printing;
+using PdfSharp.Pdf.IO;
+using PdfSharp.Pdf;
 
 
 namespace Printer
@@ -151,6 +153,29 @@ namespace Printer
             // 如果不包含虛擬印表機的名稱，則認為是實體印表機
             return true;
         }
+
+        public static void MergePdfFiles(string[] filePaths, string outputPath)
+        {
+            using (PdfDocument outputDocument = new PdfDocument())
+            {
+                foreach (string filePath in filePaths)
+                {
+                    using (PdfDocument inputDocument = PdfReader.Open(filePath, PdfDocumentOpenMode.Import))
+                    {
+                        for (int i = 0; i < inputDocument.PageCount; i++)
+                        {
+                            PdfPage page = inputDocument.Pages[i];
+                            PdfPage newPage = outputDocument.AddPage(page);
+
+                            // 對每一頁進行 90 度旋轉（可選：90, 180, 270）
+                            newPage.Rotate = (newPage.Rotate + 90) % 360;
+                        }
+                    }
+                }
+
+                outputDocument.Save(outputPath);
+            }
+        }
         #endregion
 
         #region Parameter and Init
@@ -196,6 +221,35 @@ namespace Printer
                         System.Drawing.Image image = System.Drawing.Image.FromFile(@"Icon\Rem Pin.bmp"); // 替換為圖片的路徑
                         PrintStringAndImage printer = new PrintStringAndImage(text, image);
                         printer.ShowPrintPreview();
+                        break;
+                    }
+                case nameof(Merge_PDF):
+                    {
+                        string[] pdfFiles = new string[]
+                        {
+                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0001.pdf",
+                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0002.pdf",
+                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0003.pdf",
+                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0004.pdf",
+                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0005.pdf",
+                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0006.pdf",
+                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0007.pdf",
+                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0008.pdf",
+                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0009.pdf",
+                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0010.pdf",
+                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0011.pdf",
+                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0012.pdf",
+                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0013.pdf",
+                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0014.pdf",
+                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0015.pdf",
+                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0016.pdf",
+                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0017.pdf",
+                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0018.pdf",
+                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0019.pdf",
+                        };
+                        string outputFilePath = @"D:\Chimingkuei\repos\Printer\MergedOutput.pdf";
+                        MergePdfFiles(pdfFiles, outputFilePath);
+                        Console.WriteLine("PDF 合併完成！");
                         break;
                     }
             }

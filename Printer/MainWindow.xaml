@@ -48,6 +48,7 @@
                     <Button x:Name="PrintPreview" Style="{StaticResource BaseButton}" Margin="765,74,65,316" Content="預覽" FontSize="18" Background="#FF3E6FB3" Click="Main_Btn_Click"/>
                     <TextBox x:Name="Parameter1" Style="{StaticResource BaseTextBox}" Tag="請輸入內容..." Margin="837,351,5,53"/>
                     <TextBox x:Name="Parameter2" Style="{StaticResource BaseTextBox}" Tag="請輸入內容..." Margin="836,400,6,6"/>
+                    <Button x:Name="Merge_PDF" Style="{StaticResource BaseButton}" Margin="763,168,67,221" Content="合併PDF" FontSize="18" Background="#FF3E6FB3" Click="Main_Btn_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="參數畫面" Style="{StaticResource BaseTabcontrol}">
