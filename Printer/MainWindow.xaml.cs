@@ -137,11 +137,10 @@ namespace Printer
         }
         #endregion
 
-        private static bool IsPhysicalPrinter(string printerName)
+        private bool IsPhysicalPrinter(string printerName)
         {
             // 篩選條件，可以根據虛擬印表機的名稱進行排除
             string[] virtualPrinters = { "OneNote", "PDF", "XPS", "FAX", "Microsoft Print to PDF", "AnyDesk" };
-
             foreach (string virtualPrinter in virtualPrinters)
             {
                 if (printerName.Contains(virtualPrinter))
@@ -149,32 +148,8 @@ namespace Printer
                     return false;
                 }
             }
-
             // 如果不包含虛擬印表機的名稱，則認為是實體印表機
             return true;
-        }
-
-        public static void MergePdfFiles(string[] filePaths, string outputPath)
-        {
-            using (PdfDocument outputDocument = new PdfDocument())
-            {
-                foreach (string filePath in filePaths)
-                {
-                    using (PdfDocument inputDocument = PdfReader.Open(filePath, PdfDocumentOpenMode.Import))
-                    {
-                        for (int i = 0; i < inputDocument.PageCount; i++)
-                        {
-                            PdfPage page = inputDocument.Pages[i];
-                            PdfPage newPage = outputDocument.AddPage(page);
-
-                            // 對每一頁進行 90 度旋轉（可選：90, 180, 270）
-                            newPage.Rotate = (newPage.Rotate + 90) % 360;
-                        }
-                    }
-                }
-
-                outputDocument.Save(outputPath);
-            }
         }
         #endregion
 
@@ -182,13 +157,14 @@ namespace Printer
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             LoadConfig(0, 0);
-            Display_Windows.Image = System.Drawing.Image.FromFile(@"Icon\Printer.png");
-            Display_Windows.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            Parameter1.Visibility = Visibility.Collapsed;
+            Parameter2.Visibility = Visibility.Collapsed;
         }
         BaseConfig<RootObject> Config = new BaseConfig<RootObject>();
         BaseLogRecord Logger = new BaseLogRecord();
+        DataHandler DH = new DataHandler();
         #endregion
-        
+
         #region Main Screen
         private void Main_Btn_Click(object sender, RoutedEventArgs e)
         {
@@ -211,7 +187,7 @@ namespace Printer
                     {
                         string text = "這是一段要列印的文字內容。";
                         System.Drawing.Image image = System.Drawing.Image.FromFile(@"Icon\Rem Pin.bmp"); // 替換為圖片的路徑
-                        PrintStringAndImage printer = new PrintStringAndImage(text, image);
+                        PrinterHandler printer = new PrinterHandler(text, image);
                         printer.Print();
                         break;
                     }
@@ -219,7 +195,7 @@ namespace Printer
                     {
                         string text = "這是一段要列印的文字內容。";
                         System.Drawing.Image image = System.Drawing.Image.FromFile(@"Icon\Rem Pin.bmp"); // 替換為圖片的路徑
-                        PrintStringAndImage printer = new PrintStringAndImage(text, image);
+                        PrinterHandler printer = new PrinterHandler(text, image);
                         printer.ShowPrintPreview();
                         break;
                     }
@@ -248,7 +224,7 @@ namespace Printer
                             @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0019.pdf",
                         };
                         string outputFilePath = @"D:\Chimingkuei\repos\Printer\MergedOutput.pdf";
-                        MergePdfFiles(pdfFiles, outputFilePath);
+                        DH.MergePdfFiles(pdfFiles, outputFilePath);
                         Console.WriteLine("PDF 合併完成！");
                         break;
                     }

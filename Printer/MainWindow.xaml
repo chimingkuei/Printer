@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Closing="WindowClosing" 
         ResizeMode="CanMinimize"
-        Title="Template" Height="700" Width="1000" Background="#FF3E6FB3" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        Title="Printer" Height="700" Width="1000" Background="#FF3E6FB3" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
         <TabControl x:Name="Log" HorizontalAlignment="Left" Height="172" Margin="5,485,0,0" VerticalAlignment="Top" Width="790" Background="#FFE6F0FF">
             <TabControl.Resources>
@@ -37,23 +37,21 @@
                 <RichTextBox x:Name="richTextBoxDebug" Background="#FF4396BF"/>
             </TabItem>
         </TabControl>
+        <Image x:Name="Logo" HorizontalAlignment="Left" Height="153" Margin="813,507,0,0" VerticalAlignment="Top" Width="156" Source="/Icon/Printer.png"/>
         <TabControl HorizontalAlignment="Left" Margin="5,3,0,0" VerticalAlignment="Top" Height="478" Width="978" Background="#FFE6F0FF">
             <TabItem Header="主畫面" Style="{StaticResource BaseTabcontrol}">
                 <Grid>
-                    <WindowsFormsHost  Margin="42,18,439,16">
-                        <wf:PictureBox x:Name="Display_Windows" BorderStyle="FixedSingle"/>
-                    </WindowsFormsHost>
                     <Button x:Name="Demo" Style="{StaticResource BaseButton}" Margin="578,74,252,316" Content="顯示印表機" FontSize="18" Background="#FF3E6FB3" Click="Main_Btn_Click"/>
                     <Button x:Name="Print" Style="{StaticResource BaseButton}" Margin="578,168,252,221" Content="列印" FontSize="18" Background="#FF3E6FB3" Click="Main_Btn_Click"/>
                     <Button x:Name="PrintPreview" Style="{StaticResource BaseButton}" Margin="765,74,65,316" Content="預覽" FontSize="18" Background="#FF3E6FB3" Click="Main_Btn_Click"/>
+                    <Button x:Name="Merge_PDF" Style="{StaticResource BaseButton}" Margin="763,168,67,221" Content="合併PDF" FontSize="18" Background="#FF3E6FB3" Click="Main_Btn_Click"/>
                     <TextBox x:Name="Parameter1" Style="{StaticResource BaseTextBox}" Tag="請輸入內容..." Margin="837,351,5,53"/>
                     <TextBox x:Name="Parameter2" Style="{StaticResource BaseTextBox}" Tag="請輸入內容..." Margin="836,400,6,6"/>
-                    <Button x:Name="Merge_PDF" Style="{StaticResource BaseButton}" Margin="763,168,67,221" Content="合併PDF" FontSize="18" Background="#FF3E6FB3" Click="Main_Btn_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="參數畫面" Style="{StaticResource BaseTabcontrol}">
                 <Grid>
-                    
+
                 </Grid>
             </TabItem>
         </TabControl>

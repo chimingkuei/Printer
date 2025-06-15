@@ -6,10 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PdfSharp.Pdf.IO;
+using PdfSharp.Pdf;
 
 namespace Printer
 {
-    public class PrintStringAndImage
+    public class PrinterHandler
     {
         private PrintDocument printDocument;
         private string textToPrint;
@@ -41,7 +43,7 @@ namespace Printer
             e.HasMorePages = (currentPage < 2); // 總共兩頁
         }
 
-        public PrintStringAndImage(string text, Image image)
+        public PrinterHandler(string text, Image image)
         {
             textToPrint = text;
             imageToPrint = image;
@@ -78,4 +80,30 @@ namespace Printer
             previewDialog.ShowDialog();
         }
     }
+
+    public class DataHandler
+    {
+        public void MergePdfFiles(string[] filePaths, string outputPath)
+        {
+            using (PdfDocument outputDocument = new PdfDocument())
+            {
+                foreach (string filePath in filePaths)
+                {
+                    using (PdfDocument inputDocument = PdfReader.Open(filePath, PdfDocumentOpenMode.Import))
+                    {
+                        for (int i = 0; i < inputDocument.PageCount; i++)
+                        {
+                            PdfPage page = inputDocument.Pages[i];
+                            PdfPage newPage = outputDocument.AddPage(page);
+                            // 對每一頁進行 90 度旋轉（可選：90, 180, 270）
+                            newPage.Rotate = (newPage.Rotate + 90) % 360;
+                        }
+                    }
+                }
+                outputDocument.Save(outputPath);
+            }
+        }
+
+    }
+
 }
