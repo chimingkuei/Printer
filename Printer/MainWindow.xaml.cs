@@ -203,28 +203,14 @@ namespace Printer
                     {
                         string[] pdfFiles = new string[]
                         {
-                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0001.pdf",
-                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0002.pdf",
-                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0003.pdf",
-                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0004.pdf",
-                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0005.pdf",
-                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0006.pdf",
-                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0007.pdf",
-                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0008.pdf",
-                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0009.pdf",
-                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0010.pdf",
-                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0011.pdf",
-                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0012.pdf",
-                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0013.pdf",
-                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0014.pdf",
-                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0015.pdf",
-                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0016.pdf",
-                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0017.pdf",
-                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0018.pdf",
-                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0019.pdf",
+                            @"D:\Chimingkuei\repos\Printer\新增資料夾\File_20250615_0001.pdf",
+                            @"D:\Chimingkuei\repos\Printer\新增資料夾\File_20250615_0002.pdf",
+                            @"D:\Chimingkuei\repos\Printer\新增資料夾\File_20250615_0003.pdf",
+                            @"D:\Chimingkuei\repos\Printer\新增資料夾\File_20250615_0004.pdf",
+                            @"D:\Chimingkuei\repos\Printer\新增資料夾\File_20250615_0005.pdf",
                         };
-                        string outputFilePath = @"D:\Chimingkuei\repos\Printer\MergedOutput.pdf";
-                        DH.MergePdfFiles(pdfFiles, outputFilePath);
+                        string outputFilePath = @"D:\Chimingkuei\repos\Printer\MergedOutput1.pdf";
+                        DH.MergePdfFiles(pdfFiles, outputFilePath, 0);
                         Console.WriteLine("PDF 合併完成！");
                         break;
                     }

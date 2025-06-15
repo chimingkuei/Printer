@@ -83,7 +83,7 @@ namespace Printer
 
     public class DataHandler
     {
-        public void MergePdfFiles(string[] filePaths, string outputPath)
+        public void MergePdfFiles(string[] filePaths, string outputPath, int rotateAngle)
         {
             using (PdfDocument outputDocument = new PdfDocument())
             {
@@ -95,8 +95,8 @@ namespace Printer
                         {
                             PdfPage page = inputDocument.Pages[i];
                             PdfPage newPage = outputDocument.AddPage(page);
-                            // 對每一頁進行 90 度旋轉（可選：90, 180, 270）
-                            newPage.Rotate = (newPage.Rotate + 90) % 360;
+                            // 對每一頁進行旋轉（可選：0, 90, 180, 270）
+                            newPage.Rotate = (newPage.Rotate + rotateAngle) % 360;
                         }
                     }
                 }
