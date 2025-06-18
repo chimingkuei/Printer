@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PdfSharp.Pdf.IO;
 using PdfSharp.Pdf;
+using System.IO;
 
 namespace Printer
 {
@@ -101,6 +102,28 @@ namespace Printer
                     }
                 }
                 outputDocument.Save(outputPath);
+            }
+        }
+
+        public void SplitPdfFiles(string inputFile, string outputFolder)
+        {
+            if (!Directory.Exists(outputFolder))
+                Directory.CreateDirectory(outputFolder);
+            // 開啟來源PDF
+            PdfDocument inputDocument = PdfReader.Open(inputFile, PdfDocumentOpenMode.Import);
+            for (int idx = 0; idx < inputDocument.PageCount; idx++)
+            {
+                // 建立新的PDF
+                PdfDocument outputDocument = new PdfDocument();
+                outputDocument.Version = inputDocument.Version;
+                outputDocument.Info.Title = $"Page {idx + 1} of {inputDocument.Info.Title}";
+                outputDocument.Info.Creator = inputDocument.Info.Creator;
+                // 將指定頁加入新的PDF
+                outputDocument.AddPage(inputDocument.Pages[idx]);
+                // 儲存
+                string outputFilename = Path.Combine(outputFolder, $"Page_{idx + 1}.pdf");
+                outputDocument.Save(outputFilename);
+                Console.WriteLine($"Saved: {outputFilename}");
             }
         }
 

@@ -214,6 +214,14 @@ namespace Printer
                         Console.WriteLine("PDF 合併完成！");
                         break;
                     }
+                case nameof(Split_PDF):
+                    {
+                        string inputFile = @"C:\PDFs\input.pdf";
+                        string outputFolder = @"C:\PDFs\Split\";
+                        DH.SplitPdfFiles(inputFile, outputFolder);
+                        Console.WriteLine("PDF 分割完成！");
+                        break;
+                    }
             }
         }
         #endregion
