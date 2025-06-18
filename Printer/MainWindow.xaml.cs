@@ -170,7 +170,15 @@ namespace Printer
         {
             switch ((sender as Button).Name)
             {
-                case nameof(Demo):
+                case nameof(Open_Pdf_Folder):
+                    {
+                        System.Windows.Forms.FolderBrowserDialog pdfFolderPath = new System.Windows.Forms.FolderBrowserDialog();
+                        pdfFolderPath.Description = "Choose Save Image Path";
+                        pdfFolderPath.ShowDialog();
+                        Pdf_Folder_Path.Text = pdfFolderPath.SelectedPath;
+                        break;
+                    }
+                case nameof(Show_Printer):
                     {
                         //PrintDocument printDoc = new PrintDocument();
                         //String sDefaultPrinter = printDoc.PrinterSettings.PrinterName;  // 取得預設的印表機名稱

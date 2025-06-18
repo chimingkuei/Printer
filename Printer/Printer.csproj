@@ -280,6 +280,9 @@
   <ItemGroup>
     <Resource Include="Printer.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Open Folder Path.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
