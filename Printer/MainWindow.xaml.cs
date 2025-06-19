@@ -159,6 +159,9 @@ namespace Printer
             LoadConfig(0, 0);
             Parameter1.Visibility = Visibility.Collapsed;
             Parameter2.Visibility = Visibility.Collapsed;
+            Show_Printer.Visibility = Visibility.Collapsed;
+            Print.Visibility = Visibility.Collapsed;
+            PrintPreview.Visibility = Visibility.Collapsed;
         }
         BaseConfig<RootObject> Config = new BaseConfig<RootObject>();
         BaseLogRecord Logger = new BaseLogRecord();
@@ -170,12 +173,20 @@ namespace Printer
         {
             switch ((sender as Button).Name)
             {
-                case nameof(Open_Pdf_Folder):
+                case nameof(Open_MergePdf_Folder):
                     {
                         System.Windows.Forms.FolderBrowserDialog pdfFolderPath = new System.Windows.Forms.FolderBrowserDialog();
-                        pdfFolderPath.Description = "Choose Save Image Path";
+                        pdfFolderPath.Description = "Choose Merge Pdf Folder Path";
                         pdfFolderPath.ShowDialog();
-                        Pdf_Folder_Path.Text = pdfFolderPath.SelectedPath;
+                        MergePdf_Folder_Path.Text = pdfFolderPath.SelectedPath;
+                        break;
+                    }
+                case nameof(Open_SplitPdf_Folder):
+                    {
+                        System.Windows.Forms.FolderBrowserDialog pdfFolderPath = new System.Windows.Forms.FolderBrowserDialog();
+                        pdfFolderPath.Description = "Choose Split Pdf Folder Path";
+                        pdfFolderPath.ShowDialog();
+                        SplitPdf_Folder_Path.Text = pdfFolderPath.SelectedPath;
                         break;
                     }
                 case nameof(Show_Printer):

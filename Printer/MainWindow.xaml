@@ -41,20 +41,37 @@
         <TabControl HorizontalAlignment="Left" Margin="5,3,0,0" VerticalAlignment="Top" Height="478" Width="978" Background="#FFE6F0FF">
             <TabItem Header="主畫面" Style="{StaticResource BaseTabcontrol}">
                 <Grid>
-                    <Button x:Name="Show_Printer" Style="{StaticResource BaseButton}" Margin="42,174,788,215" Content="顯示印表機" FontSize="18" Background="#FF3E6FB3" Click="Main_Btn_Click"/>
-                    <Button x:Name="Print" Style="{StaticResource BaseButton}" Margin="40,254,790,135" Content="列印" FontSize="18" Background="#FF3E6FB3" Click="Main_Btn_Click"/>
-                    <Button x:Name="PrintPreview" Style="{StaticResource BaseButton}" Margin="38,340,792,49" Content="預覽" FontSize="18" Background="#FF3E6FB3" Click="Main_Btn_Click"/>
-                    <Button x:Name="Merge_PDF" Style="{StaticResource BaseButton}" Margin="218,166,612,223" Content="合併PDF" FontSize="18" Background="#FF3E6FB3" Click="Main_Btn_Click"/>
-                    <TextBox x:Name="Parameter1" Style="{StaticResource BaseTextBox}" Tag="請輸入內容..." Margin="837,351,5,53"/>
-                    <TextBox x:Name="Parameter2" Style="{StaticResource BaseTextBox}" Tag="請輸入內容..." Margin="836,400,6,6"/>
-                    <Button x:Name="Split_PDF" Style="{StaticResource BaseButton}" Margin="220,252,610,136" Content="分割PDF" FontSize="18" Background="#FF3E6FB3" Click="Main_Btn_Click"/>
-                    <Button x:Name="Open_Pdf_Folder" Style="{StaticResource BaseButton}" Margin="82,34,806,334" FontSize="18"  Background="#FFE6F0FF" BorderThickness="0" Click="Main_Btn_Click">
-                        <Button.ToolTip>
-                            <TextBlock FontSize="14">Open Pdf Folder</TextBlock>
-                        </Button.ToolTip>
-                        <Image x:Name="Open_Pdf_Folder_Icon" Source="UI/Open Folder Path.png" Width="82" Height="76"/>
-                    </Button>
-                    <TextBox x:Name="Pdf_Folder_Path" Style="{StaticResource BaseTextBox}" Margin="208,51,98,344" FontSize="12"></TextBox>
+                    <WrapPanel Orientation="Horizontal" Margin="76,38,79,250">
+                        <Button x:Name="Open_MergePdf_Folder" Style="{StaticResource BaseButton}" Margin="50,0,0,0" FontSize="18"  Background="#FFE6F0FF" BorderThickness="0" Click="Main_Btn_Click">
+                            <Button.ToolTip>
+                                <ToolTip Background="Transparent" Padding="0" BorderThickness="0" HasDropShadow="True">
+                                    <Border Background="Gray" CornerRadius="10" Padding="8">
+                                        <TextBlock FontSize="14" Foreground="#00FF66">開啟合併PDF資料夾路徑</TextBlock>
+                                    </Border>
+                                </ToolTip>
+                            </Button.ToolTip>
+                            <Image x:Name="Open_MergePdf_Folder_Icon" Source="UI/Open Folder Path.png" Width="82" Height="76"/>
+                        </Button>
+                        <TextBox x:Name="MergePdf_Folder_Path" Style="{StaticResource BaseTextBox}" Tag="請輸入合併PDF檔資料夾路徑!" Margin="30,15,0,0" FontSize="12" Height="42" Width="590"/>
+                        <Button x:Name="Open_SplitPdf_Folder" Style="{StaticResource BaseButton}" Margin="50,0,0,0" FontSize="18"  Background="#FFE6F0FF" BorderThickness="0" Click="Main_Btn_Click">
+                            <Button.ToolTip>
+                                <ToolTip Background="Transparent" Padding="0" BorderThickness="0" HasDropShadow="True">
+                                    <Border Background="Gray" CornerRadius="10" Padding="8">
+                                        <TextBlock FontSize="14" Foreground="#00FF66">開啟切割PDF資料夾路徑</TextBlock>
+                                    </Border>
+                                </ToolTip>
+                            </Button.ToolTip>
+                            <Image x:Name="Open_SplitPdf_Folder_Icon" Source="UI/Open Folder Path.png" Width="82" Height="76"/>
+                        </Button>
+                        <TextBox x:Name="SplitPdf_Folder_Path" Style="{StaticResource BaseTextBox}" Tag="請輸入切割PDF檔資料夾路徑!" Margin="30,15,0,0" FontSize="12" Height="42" Width="590"></TextBox>
+                    </WrapPanel>
+                    <Button x:Name="Show_Printer" Style="{StaticResource CircleButton}" Margin="28,209,825,118" Content="顯示印表機" FontSize="18" Click="Main_Btn_Click"/>
+                    <Button x:Name="Print" Style="{StaticResource CircleButton}" Margin="26,321,827,4" Content="列印" FontSize="18" Click="Main_Btn_Click"/>
+                    <Button x:Name="PrintPreview" Style="{StaticResource CircleButton}" Margin="156,211,697,117" Content="預覽" FontSize="18" Click="Main_Btn_Click"/>
+                    <Button x:Name="Merge_PDF" Style="{StaticResource CircleButton}" Margin="289,252,564,76" Content="合併PDF" FontSize="18" Click="Main_Btn_Click"/>
+                    <Button x:Name="Split_PDF" Style="{StaticResource CircleButton}" Margin="551,252,302,76" Content="分割PDF" FontSize="18" Click="Main_Btn_Click"/>
+                    <TextBox x:Name="Parameter1" Style="{StaticResource BaseTextBox}" Tag="請輸入內容..." Margin="824,347,18,56"/>
+                    <TextBox x:Name="Parameter2" Style="{StaticResource BaseTextBox}" Tag="請輸入內容..." Margin="823,400,19,6"/>
                 </Grid>
             </TabItem>
         </TabControl>
