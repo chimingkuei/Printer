@@ -34,10 +34,10 @@ namespace Printer
     #region Config Class
     public class SerialNumber
     {
-        [JsonProperty("Parameter1_val")]
-        public string Parameter1_val { get; set; }
-        [JsonProperty("Parameter2_val")]
-        public string Parameter2_val { get; set; }
+        [JsonProperty("MergePdf_Folder_Path_val")]
+        public string MergePdf_Folder_Path_val { get; set; }
+        [JsonProperty("SplitPdf_Folder_Path_val")]
+        public string SplitPdf_Folder_Path_val { get; set; }
     }
 
     public class Model
@@ -79,8 +79,8 @@ namespace Printer
         {
             SerialNumber serialnumber_ = new SerialNumber
             {
-                Parameter1_val = Parameter1.Text,
-                Parameter2_val = Parameter2.Text
+                MergePdf_Folder_Path_val = MergePdf_Folder_Path.Text,
+                SplitPdf_Folder_Path_val = SplitPdf_Folder_Path.Text
             };
             return serialnumber_;
         }
@@ -90,8 +90,8 @@ namespace Printer
             List<RootObject> Parameter_info = Config.Load(encryption);
             if (Parameter_info != null)
             {
-                Parameter1.Text = Parameter_info[model].Models[serialnumber].SerialNumbers.Parameter1_val;
-                Parameter2.Text = Parameter_info[model].Models[serialnumber].SerialNumbers.Parameter2_val;
+                MergePdf_Folder_Path.Text = Parameter_info[model].Models[serialnumber].SerialNumbers.MergePdf_Folder_Path_val;
+                SplitPdf_Folder_Path.Text = Parameter_info[model].Models[serialnumber].SerialNumbers.SplitPdf_Folder_Path_val;
             }
             else
             {
@@ -157,8 +157,6 @@ namespace Printer
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             LoadConfig(0, 0);
-            Parameter1.Visibility = Visibility.Collapsed;
-            Parameter2.Visibility = Visibility.Collapsed;
             Show_Printer.Visibility = Visibility.Collapsed;
             Print.Visibility = Visibility.Collapsed;
             PrintPreview.Visibility = Visibility.Collapsed;
@@ -220,17 +218,21 @@ namespace Printer
                     }
                 case nameof(Merge_PDF):
                     {
-                        string[] pdfFiles = new string[]
+                        var sortedPdfFiles = Directory.GetFiles(MergePdf_Folder_Path.Text, "*.pdf")
+                        .OrderBy(path =>
                         {
-                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0001.pdf",
-                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0002.pdf",
-                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0003.pdf",
-                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0004.pdf",
-                            @"D:\Chimingkuei\repos\Printer\Testing Set\File_20250614_0005.pdf",
-                        };
-                        string outputFilePath = @"D:\Chimingkuei\repos\Printer\MergedOutput.pdf";
-                        DH.MergePdfFiles(pdfFiles, outputFilePath, 0);
-                        Console.WriteLine("PDF 合併完成！");
+                            string fileName = System.IO.Path.GetFileNameWithoutExtension(path);
+                            return int.Parse(fileName);
+                        })
+                        .ToArray();
+                        // 顯示排序檔名
+                        //foreach (var file in sortedPdfFiles)
+                        //{
+                        //    Console.WriteLine(file);
+                        //}
+                        Directory.CreateDirectory(System.IO.Path.Combine(MergePdf_Folder_Path.Text, "MergePdf"));
+                        string outputFilePath = System.IO.Path.Combine(MergePdf_Folder_Path.Text, "MergePdf", "MergeResult.pdf");
+                        DH.MergePdfFiles(sortedPdfFiles, outputFilePath, 0);
                         break;
                     }
                 case nameof(Split_PDF):
@@ -239,6 +241,11 @@ namespace Printer
                         string outputFolder = @"C:\PDFs\Split\";
                         DH.SplitPdfFiles(inputFile, outputFolder);
                         Console.WriteLine("PDF 分割完成！");
+                        break;
+                    }
+                case nameof(Save_Config):
+                    {
+                        SaveConfig(0, 0);
                         break;
                     }
             }
