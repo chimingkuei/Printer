@@ -27,6 +27,7 @@ using System.Windows.Media.Media3D;
 using System.Drawing.Printing;
 using PdfSharp.Pdf.IO;
 using PdfSharp.Pdf;
+using Microsoft.Win32;
 
 
 namespace Printer
@@ -177,14 +178,18 @@ namespace Printer
                         pdfFolderPath.Description = "Choose Merge Pdf Folder Path";
                         pdfFolderPath.ShowDialog();
                         MergePdf_Folder_Path.Text = pdfFolderPath.SelectedPath;
+                        Logger.WriteLog("開啟合併PDF資料夾!", LogLevel.General, richTextBoxGeneral);
                         break;
                     }
-                case nameof(Open_SplitPdf_Folder):
+                case nameof(Open_SplitPdf_File):
                     {
-                        System.Windows.Forms.FolderBrowserDialog pdfFolderPath = new System.Windows.Forms.FolderBrowserDialog();
-                        pdfFolderPath.Description = "Choose Split Pdf Folder Path";
-                        pdfFolderPath.ShowDialog();
-                        SplitPdf_Folder_Path.Text = pdfFolderPath.SelectedPath;
+                        OpenFileDialog openFileDialog = new OpenFileDialog();
+                        openFileDialog.Filter = "Files|*.pdf;*|All files|*.*";
+                        if (openFileDialog.ShowDialog() == true)
+                        {
+                            SplitPdf_Folder_Path.Text = openFileDialog.FileName;
+                        }
+                        Logger.WriteLog("開啟切割PDF檔!", LogLevel.General, richTextBoxGeneral);
                         break;
                     }
                 case nameof(Show_Printer):
@@ -218,34 +223,49 @@ namespace Printer
                     }
                 case nameof(Merge_PDF):
                     {
-                        var sortedPdfFiles = Directory.GetFiles(MergePdf_Folder_Path.Text, "*.pdf")
-                        .OrderBy(path =>
+                        if (!string.IsNullOrEmpty(MergePdf_Folder_Path.Text))
                         {
-                            string fileName = System.IO.Path.GetFileNameWithoutExtension(path);
-                            return int.Parse(fileName);
-                        })
-                        .ToArray();
-                        // 顯示排序檔名
-                        //foreach (var file in sortedPdfFiles)
-                        //{
-                        //    Console.WriteLine(file);
-                        //}
-                        Directory.CreateDirectory(System.IO.Path.Combine(MergePdf_Folder_Path.Text, "MergePdf"));
-                        string outputFilePath = System.IO.Path.Combine(MergePdf_Folder_Path.Text, "MergePdf", "MergeResult.pdf");
-                        DH.MergePdfFiles(sortedPdfFiles, outputFilePath, 0);
+                            var sortedPdfFiles = Directory.GetFiles(MergePdf_Folder_Path.Text, "*.pdf")
+                            .OrderBy(path =>
+                            {
+                                string fileName = System.IO.Path.GetFileNameWithoutExtension(path);
+                                return int.Parse(fileName);
+                            })
+                            .ToArray();
+                            // 顯示排序檔名
+                            //foreach (var file in sortedPdfFiles)
+                            //{
+                            //    Console.WriteLine(file);
+                            //}
+                            Directory.CreateDirectory(System.IO.Path.Combine(MergePdf_Folder_Path.Text, "MergePdf"));
+                            string outputFilePath = System.IO.Path.Combine(MergePdf_Folder_Path.Text, "MergePdf", "MergeResult.pdf");
+                            DH.MergePdfFiles(sortedPdfFiles, outputFilePath, 0);
+                            Logger.WriteLog("合併PDF完成!", LogLevel.General, richTextBoxGeneral);
+                        }
+                        else
+                        {
+                            MessageBox.Show("請輸入合併PDF檔資料夾路徑!", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
                         break;
                     }
                 case nameof(Split_PDF):
                     {
-                        string inputFile = @"C:\PDFs\input.pdf";
-                        string outputFolder = @"C:\PDFs\Split\";
-                        DH.SplitPdfFiles(inputFile, outputFolder);
-                        Console.WriteLine("PDF 分割完成！");
+                        if (!string.IsNullOrEmpty(SplitPdf_Folder_Path.Text))
+                        {
+                            string outputFolder = System.IO.Path.GetDirectoryName(SplitPdf_Folder_Path.Text);
+                            DH.SplitPdfFiles(SplitPdf_Folder_Path.Text, outputFolder);
+                            Logger.WriteLog("分割PDF完成!", LogLevel.General, richTextBoxGeneral);
+                        }
+                        else
+                        {
+                            MessageBox.Show("請輸入切割PDF檔資料夾路徑!", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
                         break;
                     }
                 case nameof(Save_Config):
                     {
                         SaveConfig(0, 0);
+                        Logger.WriteLog("儲存參數!", LogLevel.General, richTextBoxGeneral);
                         break;
                     }
             }

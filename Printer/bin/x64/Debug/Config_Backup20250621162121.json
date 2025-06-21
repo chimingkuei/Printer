@@ -5,7 +5,8 @@
         "SerialNumbers": {
           "Parameter1_val": "",
           "Parameter2_val": "",
-          "MergePdf_Folder_Path_val": "D:\\Chimingkuei\\repos\\Printer\\Testing Set1"
+          "MergePdf_Folder_Path_val": "D:\\Chimingkuei\\repos\\Printer\\Testing Set1",
+          "SplitPdf_Folder_Path_val": "D:\\Chimingkuei\\repos\\Printer\\Testing Set1"
         }
       },
       {

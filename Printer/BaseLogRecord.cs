@@ -10,6 +10,9 @@ using System.Windows.Media;
 
 namespace Printer
 {
+    /// <summary>
+    /// Logger.WriteLog("儲存參數!", LogLevel.General, richTextBoxGeneral);
+    /// </summary>
     public class BaseLogRecord
     {
         public enum LogLevel { General, Warning, Debug, Error };
