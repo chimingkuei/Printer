@@ -6,7 +6,8 @@
           "Parameter1_val": "",
           "Parameter2_val": "",
           "MergePdf_Folder_Path_val": "D:\\Chimingkuei\\repos\\Printer\\Testing Set1",
-          "SplitPdf_Folder_Path_val": "D:\\Chimingkuei\\repos\\Printer\\Testing Set1"
+          "SplitPdf_Folder_Path_val": "D:\\Chimingkuei\\repos\\Printer\\MergedOutput.pdf",
+          "RotatePdf_Folder_Path_val": "D:\\Chimingkuei\\repos\\Printer\\Testing dataset1\\File_20250614_0001.pdf"
         }
       },
       {

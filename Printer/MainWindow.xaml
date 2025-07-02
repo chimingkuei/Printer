@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Closing="WindowClosing" 
         ResizeMode="CanMinimize"
-        Title="Printer" Height="700" Width="1000" Background="#FF3E6FB3" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        Title="PdfTool" Height="700" Width="1000" Background="#FF3E6FB3" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
         <TabControl x:Name="Log" HorizontalAlignment="Left" Height="172" Margin="5,485,0,0" VerticalAlignment="Top" Width="790" Background="#FFE6F0FF">
             <TabControl.Resources>
@@ -37,11 +37,11 @@
                 <RichTextBox x:Name="richTextBoxDebug" Background="#FF4396BF"/>
             </TabItem>
         </TabControl>
-        <Image x:Name="Logo" HorizontalAlignment="Left" Height="153" Margin="813,507,0,0" VerticalAlignment="Top" Width="156" Source="/Icon/Printer.png"/>
+        <Image x:Name="Logo" HorizontalAlignment="Left" Height="153" Margin="813,507,0,0" VerticalAlignment="Top" Width="156" Source="/Icon/pdf.png"/>
         <TabControl HorizontalAlignment="Left" Margin="5,3,0,0" VerticalAlignment="Top" Height="478" Width="978" Background="#FFE6F0FF">
             <TabItem Header="主畫面" Style="{StaticResource BaseTabcontrol}">
                 <Grid>
-                    <WrapPanel Orientation="Horizontal" Margin="76,38,79,250">
+                    <WrapPanel Orientation="Horizontal" Margin="76,14,79,192">
                         <Button x:Name="Open_MergePdf_Folder" Style="{StaticResource BaseButton}" Margin="50,0,0,0" FontSize="18"  Background="#FFE6F0FF" BorderThickness="0" Click="Main_Btn_Click">
                             <Button.ToolTip>
                                 <ToolTip Background="Transparent" Padding="0" BorderThickness="0" HasDropShadow="True">
@@ -52,7 +52,7 @@
                             </Button.ToolTip>
                             <Image x:Name="Open_MergePdf_Folder_Icon" Source="UI/Open Folder Path.png" Width="82" Height="76"/>
                         </Button>
-                        <TextBox x:Name="MergePdf_Folder_Path" Style="{StaticResource BaseTextBox}" Tag="請輸入合併PDF檔資料夾路徑!" Margin="30,15,0,0" FontSize="12" Height="42" Width="590"/>
+                        <TextBox x:Name="MergePdf_Folder_Path" Style="{StaticResource BaseTextBox}" Tag="請輸入欲合併PDF檔資料夾路徑!" Margin="30,15,0,0" FontSize="12" Height="42" Width="590"/>
                         <Button x:Name="Open_SplitPdf_File" Style="{StaticResource BaseButton}" Margin="60,0,0,0" FontSize="18"  Background="#FFE6F0FF" BorderThickness="0" Click="Main_Btn_Click">
                             <Button.ToolTip>
                                 <ToolTip Background="Transparent" Padding="0" BorderThickness="0" HasDropShadow="True">
@@ -63,22 +63,43 @@
                             </Button.ToolTip>
                             <Image x:Name="Open_SplitPdf_Folder_Icon" Source="/UI/Open File Path.png" Width="82" Height="76"/>
                         </Button>
-                        <TextBox x:Name="SplitPdf_Folder_Path" Style="{StaticResource BaseTextBox}" Tag="請輸入切割PDF檔路徑!" Margin="20,0,0,0" FontSize="12" Height="42" Width="590"></TextBox>
+                        <TextBox x:Name="SplitPdf_Folder_Path" Style="{StaticResource BaseTextBox}" Tag="請輸入欲分割PDF檔路徑!" Margin="20,0,0,0" FontSize="12" Height="42" Width="590"></TextBox>
+                        <Button x:Name="Open_RotatePdf_File" Style="{StaticResource BaseButton}" Margin="60,0,0,0" FontSize="18"  Background="#FFE6F0FF" BorderThickness="0" Click="Main_Btn_Click">
+                            <Button.ToolTip>
+                                <ToolTip Background="Transparent" Padding="0" BorderThickness="0" HasDropShadow="True">
+                                    <Border Background="Gray" CornerRadius="10" Padding="8">
+                                        <TextBlock FontSize="14" Foreground="#00FF66">開啟旋轉PDF檔案路徑</TextBlock>
+                                    </Border>
+                                </ToolTip>
+                            </Button.ToolTip>
+                            <Image x:Name="Open_RotatePdf_Folder_Icon" Source="/UI/Open File Path.png" Width="82" Height="76"/>
+                        </Button>
+                        <TextBox x:Name="RotatePdf_Folder_Path" Style="{StaticResource BaseTextBox}" Tag="請輸入欲旋轉PDF檔路徑!" Margin="20,0,0,0" FontSize="12" Height="42" Width="590"></TextBox>
                     </WrapPanel>
                     <Button x:Name="Show_Printer" Style="{StaticResource CircleButton}" Margin="8,42,845,285" Content="顯示印表機" FontSize="18" Click="Main_Btn_Click"/>
-                    <Button x:Name="Print" Style="{StaticResource CircleButton}" Margin="20,174,833,151" Content="列印" FontSize="18" Click="Main_Btn_Click"/>
-                    <Button x:Name="PrintPreview" Style="{StaticResource CircleButton}" Margin="20,300,833,28" Content="預覽" FontSize="18" Click="Main_Btn_Click"/>
-                    <Button x:Name="Merge_PDF" Style="{StaticResource CircleButton}" Margin="158,244,695,84" Content="合併PDF" FontSize="18" Click="Main_Btn_Click">
-                        <Button.ToolTip>
-                            <ToolTip Background="Transparent" Padding="0" BorderThickness="0" HasDropShadow="True">
-                                <Border Background="Gray" CornerRadius="10" Padding="8">
-                                    <TextBlock FontSize="14" Foreground="#00FF66">將檔名命名數字從1開始，此按鈕才有效!</TextBlock>
-                                </Border>
-                            </ToolTip>
-                        </Button.ToolTip>
-                    </Button>
-                    <Button x:Name="Split_PDF" Style="{StaticResource CircleButton}" Margin="428,246,425,82" Content="分割PDF" FontSize="18" Click="Main_Btn_Click"/>
-                    <Button x:Name="Save_Config" Style="{StaticResource CircleButton}" Margin="697,250,156,78" Content="儲存參數" FontSize="18" Click="Main_Btn_Click"/>
+                    <Button x:Name="Print" Style="{StaticResource CircleButton}" Margin="7,67,846,258" Content="列印" FontSize="18" Click="Main_Btn_Click"/>
+                    <Button x:Name="PrintPreview" Style="{StaticResource CircleButton}" Margin="8,95,845,233" Content="預覽" FontSize="18" Click="Main_Btn_Click"/>
+                    <WrapPanel Orientation="Horizontal" Margin="74,271,333,42">
+                        <Button x:Name="Merge_PDF" Style="{StaticResource CircleButton}" Margin="30,18,0,0" Content="合併PDF" FontSize="18" Height="100" Width="100" Click="Main_Btn_Click">
+                            <Button.ToolTip>
+                                <ToolTip Background="Transparent" Padding="0" BorderThickness="0" HasDropShadow="True">
+                                    <Border Background="Gray" CornerRadius="10" Padding="8">
+                                        <TextBlock FontSize="14" Foreground="#00FF66">將檔名命名數字從1開始，此按鈕才有效!</TextBlock>
+                                    </Border>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                        <Button x:Name="Split_PDF" Style="{StaticResource CircleButton}" Margin="30,18,0,0" Content="分割PDF" FontSize="18" Height="100" Width="100" Click="Main_Btn_Click"/>
+                        <Button x:Name="Rotate_PDF" Style="{StaticResource CircleButton}" Margin="30,18,0,0" Content="旋轉PDF" FontSize="18" Height="100" Width="100" Click="Main_Btn_Click"/>
+                        <Button x:Name="Save_Config" Style="{StaticResource CircleButton}" Margin="30,18,0,0" Content="儲存參數" FontSize="18" Height="100" Width="100" Click="Main_Btn_Click"/>
+                    </WrapPanel>
+                    <Label x:Name="Angle_Label" Content="旋轉角度︰" HorizontalAlignment="Left" Margin="623,323,0,0" VerticalAlignment="Top" FontSize="18" Width="93"/>
+                    <ComboBox Style="{StaticResource AdvancedComboBox}" Name="Angle" HorizontalAlignment="Left" Margin="727,317,0,81" Width="135" IsSynchronizedWithCurrentItem="True" FontSize="18">
+                        <ComboBoxItem IsSelected="True">0度</ComboBoxItem>
+                        <ComboBoxItem>90度</ComboBoxItem>
+                        <ComboBoxItem>180度</ComboBoxItem>
+                        <ComboBoxItem>270度</ComboBoxItem>
+                    </ComboBox>
                 </Grid>
             </TabItem>
         </TabControl>

@@ -39,6 +39,10 @@ namespace Printer
         public string MergePdf_Folder_Path_val { get; set; }
         [JsonProperty("SplitPdf_Folder_Path_val")]
         public string SplitPdf_Folder_Path_val { get; set; }
+        [JsonProperty("RotatePdf_Folder_Path_val")]
+        public string RotatePdf_Folder_Path_val { get; set; }
+        [JsonProperty("Angle_val")]
+        public string Angle_val { get; set; }
     }
 
     public class Model
@@ -81,7 +85,9 @@ namespace Printer
             SerialNumber serialnumber_ = new SerialNumber
             {
                 MergePdf_Folder_Path_val = MergePdf_Folder_Path.Text,
-                SplitPdf_Folder_Path_val = SplitPdf_Folder_Path.Text
+                SplitPdf_Folder_Path_val = SplitPdf_Folder_Path.Text,
+                RotatePdf_Folder_Path_val = RotatePdf_Folder_Path.Text,
+                Angle_val = Angle.Text
             };
             return serialnumber_;
         }
@@ -93,6 +99,8 @@ namespace Printer
             {
                 MergePdf_Folder_Path.Text = Parameter_info[model].Models[serialnumber].SerialNumbers.MergePdf_Folder_Path_val;
                 SplitPdf_Folder_Path.Text = Parameter_info[model].Models[serialnumber].SerialNumbers.SplitPdf_Folder_Path_val;
+                RotatePdf_Folder_Path.Text = Parameter_info[model].Models[serialnumber].SerialNumbers.RotatePdf_Folder_Path_val;
+                Angle.Text = Parameter_info[model].Models[serialnumber].SerialNumbers.Angle_val;
             }
             else
             {
@@ -192,6 +200,17 @@ namespace Printer
                         Logger.WriteLog("開啟切割PDF檔!", LogLevel.General, richTextBoxGeneral);
                         break;
                     }
+                case nameof(Open_RotatePdf_File):
+                    {
+                        OpenFileDialog openFileDialog = new OpenFileDialog();
+                        openFileDialog.Filter = "Files|*.pdf;*|All files|*.*";
+                        if (openFileDialog.ShowDialog() == true)
+                        {
+                            RotatePdf_Folder_Path.Text = openFileDialog.FileName;
+                        }
+                        Logger.WriteLog("開啟旋轉PDF檔!", LogLevel.General, richTextBoxGeneral);
+                        break;
+                    }
                 case nameof(Show_Printer):
                     {
                         //PrintDocument printDoc = new PrintDocument();
@@ -239,12 +258,14 @@ namespace Printer
                             //}
                             Directory.CreateDirectory(System.IO.Path.Combine(MergePdf_Folder_Path.Text, "MergePdf"));
                             string outputFilePath = System.IO.Path.Combine(MergePdf_Folder_Path.Text, "MergePdf", "MergeResult.pdf");
-                            DH.MergePdfFiles(sortedPdfFiles, outputFilePath, 0);
+                            string selectedText = Angle.Text;
+                            int angle = Convert.ToInt32(selectedText.Replace("度", ""));
+                            DH.MergeOrRotatePdfFiles(sortedPdfFiles, outputFilePath, angle, true);
                             Logger.WriteLog("合併PDF完成!", LogLevel.General, richTextBoxGeneral);
                         }
                         else
                         {
-                            MessageBox.Show("請輸入合併PDF檔資料夾路徑!", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            MessageBox.Show("請輸入欲合併PDF檔資料夾路徑!", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
                         break;
                     }
@@ -258,7 +279,27 @@ namespace Printer
                         }
                         else
                         {
-                            MessageBox.Show("請輸入切割PDF檔資料夾路徑!", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            MessageBox.Show("請輸入欲分割PDF檔資料夾路徑!", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
+                        break;
+                    }
+                case nameof(Rotate_PDF):
+                    {
+                        if (!string.IsNullOrEmpty(RotatePdf_Folder_Path.Text))
+                        {
+                            string outputFolder = System.IO.Path.GetDirectoryName(RotatePdf_Folder_Path.Text);
+                            Directory.CreateDirectory(System.IO.Path.Combine(outputFolder, "RotatePdf"));
+                            string outputFilePath = System.IO.Path.Combine(outputFolder, "RotatePdf", "RotateResult.pdf");
+                            string[] sortedPdfFiles = new string[1];
+                            sortedPdfFiles[0] = RotatePdf_Folder_Path.Text;
+                            string selectedText = Angle.Text;
+                            int angle = Convert.ToInt32(selectedText.Replace("度", ""));
+                            DH.MergeOrRotatePdfFiles(sortedPdfFiles, outputFilePath, angle, false);
+                            Logger.WriteLog("旋轉PDF完成!", LogLevel.General, richTextBoxGeneral);
+                        }
+                        else
+                        {
+                            MessageBox.Show("請輸入欲旋轉PDF檔資料夾路徑!", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
                         break;
                     }

@@ -84,27 +84,30 @@ namespace Printer
 
     public class DataHandler
     {
-        public void MergePdfFiles(string[] filePaths, string outputPath, int rotateAngle)
+        public void MergeOrRotatePdfFiles(string[] inputPaths, string outputPath, int rotateAngle, bool isMerge)
         {
             using (PdfDocument outputDocument = new PdfDocument())
             {
-                foreach (string filePath in filePaths)
+                foreach (string inputPath in inputPaths)
                 {
-                    using (PdfDocument inputDocument = PdfReader.Open(filePath, PdfDocumentOpenMode.Import))
+                    using (PdfDocument inputDocument = PdfReader.Open(inputPath, PdfDocumentOpenMode.Import))
                     {
                         for (int i = 0; i < inputDocument.PageCount; i++)
                         {
                             PdfPage page = inputDocument.Pages[i];
                             PdfPage newPage = outputDocument.AddPage(page);
-                            // 對每一頁進行旋轉（可選：0, 90, 180, 270）
                             newPage.Rotate = (newPage.Rotate + rotateAngle) % 360;
                         }
                     }
+                    // 若非合併模式（只旋轉單一檔案），跳出處理第一個檔案後即可
+                    if (!isMerge)
+                        break;
                 }
+
                 outputDocument.Save(outputPath);
             }
         }
-
+        
         public void SplitPdfFiles(string inputFile, string outputFolder)
         {
             if (!Directory.Exists(outputFolder))

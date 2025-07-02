@@ -61,7 +61,7 @@
     <StartupObject />
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Printer.ico</ApplicationIcon>
+    <ApplicationIcon>pdf.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -285,6 +285,13 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="UI\Open File Path.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\pdf.ico" />
+    <Resource Include="Icon\pdf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pdf.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
