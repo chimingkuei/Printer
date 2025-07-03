@@ -1,7 +1,7 @@
 ﻿Printer
 
 
-exe
+winexe
 C#
 .cs
 D:\Chimingkuei\repos\Printer\Printer\obj\x64\Debug\
@@ -16,5 +16,5 @@ D:\Chimingkuei\repos\Printer\Printer\App.xaml
 55626992833
 MainWindow.xaml;UI\ButtonStyles.xaml;UI\CheckBoxStyles.xaml;UI\ComboBoxStyles.xaml;UI\GroupBoxStyles.xaml;UI\RadioButtonStyles.xaml;UI\SliderStyles.xaml;UI\TabControlStyles.xaml;UI\TextBoxStyles.xaml;
 
-False
+True
 
