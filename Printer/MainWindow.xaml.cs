@@ -242,65 +242,62 @@ namespace Printer
                     }
                 case nameof(Merge_PDF):
                     {
-                        if (!string.IsNullOrEmpty(MergePdf_Folder_Path.Text))
-                        {
-                            var sortedPdfFiles = Directory.GetFiles(MergePdf_Folder_Path.Text, "*.pdf")
-                            .OrderBy(path =>
-                            {
-                                string fileName = System.IO.Path.GetFileNameWithoutExtension(path);
-                                return int.Parse(fileName);
-                            })
-                            .ToArray();
-                            // 顯示排序檔名
-                            //foreach (var file in sortedPdfFiles)
-                            //{
-                            //    Console.WriteLine(file);
-                            //}
-                            Directory.CreateDirectory(System.IO.Path.Combine(MergePdf_Folder_Path.Text, "MergePdf"));
-                            string outputFilePath = System.IO.Path.Combine(MergePdf_Folder_Path.Text, "MergePdf", "MergeResult.pdf");
-                            string selectedText = Angle.Text;
-                            int angle = Convert.ToInt32(selectedText.Replace("度", ""));
-                            DH.MergeOrRotatePdfFiles(sortedPdfFiles, outputFilePath, angle, true);
-                            Logger.WriteLog("合併PDF完成!", LogLevel.General, richTextBoxGeneral);
-                        }
-                        else
+                        string mergepdfFolderPath = MergePdf_Folder_Path.Text;
+                        if (string.IsNullOrEmpty(mergepdfFolderPath))
                         {
                             MessageBox.Show("請輸入欲合併PDF檔資料夾路徑!", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            return;
                         }
+                        var sortedPdfFiles = Directory.GetFiles(mergepdfFolderPath, "*.pdf")
+                           .OrderBy(path =>
+                           {
+                               string fileName = System.IO.Path.GetFileNameWithoutExtension(path);
+                               return int.Parse(fileName);
+                           })
+                           .ToArray();
+                        // 顯示排序檔名
+                        //foreach (var file in sortedPdfFiles)
+                        //{
+                        //    Console.WriteLine(file);
+                        //}
+                        Directory.CreateDirectory(System.IO.Path.Combine(mergepdfFolderPath, "MergePdf"));
+                        string outputFilePath = System.IO.Path.Combine(mergepdfFolderPath, "MergePdf", "MergeResult.pdf");
+                        string selectedText = Angle.Text;
+                        int angle = Convert.ToInt32(selectedText.Replace("度", ""));
+                        DH.MergeOrRotatePdfFiles(sortedPdfFiles, outputFilePath, angle, true);
+                        Logger.WriteLog("合併PDF完成!", LogLevel.General, richTextBoxGeneral);
                         break;
                     }
                 case nameof(Split_PDF):
                     {
-                        if (!string.IsNullOrEmpty(SplitPdf_Folder_Path.Text))
-                        {
-                            string outputFolder = System.IO.Path.GetDirectoryName(SplitPdf_Folder_Path.Text);
-                            DH.SplitPdfFiles(SplitPdf_Folder_Path.Text, outputFolder);
-                            Logger.WriteLog("分割PDF完成!", LogLevel.General, richTextBoxGeneral);
-                        }
-                        else
+                        string splitpdfFolderPath = SplitPdf_Folder_Path.Text;
+                        if (string.IsNullOrWhiteSpace(splitpdfFolderPath))
                         {
                             MessageBox.Show("請輸入欲分割PDF檔資料夾路徑!", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            return;
                         }
+                        string outputFolder = System.IO.Path.GetDirectoryName(splitpdfFolderPath);
+                        DH.SplitPdfFiles(splitpdfFolderPath, outputFolder);
+                        Logger.WriteLog("分割PDF完成!", LogLevel.General, richTextBoxGeneral);
                         break;
                     }
                 case nameof(Rotate_PDF):
                     {
-                        if (!string.IsNullOrEmpty(RotatePdf_Folder_Path.Text))
-                        {
-                            string outputFolder = System.IO.Path.GetDirectoryName(RotatePdf_Folder_Path.Text);
-                            Directory.CreateDirectory(System.IO.Path.Combine(outputFolder, "RotatePdf"));
-                            string outputFilePath = System.IO.Path.Combine(outputFolder, "RotatePdf", "RotateResult.pdf");
-                            string[] sortedPdfFiles = new string[1];
-                            sortedPdfFiles[0] = RotatePdf_Folder_Path.Text;
-                            string selectedText = Angle.Text;
-                            int angle = Convert.ToInt32(selectedText.Replace("度", ""));
-                            DH.MergeOrRotatePdfFiles(sortedPdfFiles, outputFilePath, angle, false);
-                            Logger.WriteLog("旋轉PDF完成!", LogLevel.General, richTextBoxGeneral);
-                        }
-                        else
+                        string rotatepdfFolderPath = RotatePdf_Folder_Path.Text;
+                        if (!string.IsNullOrEmpty(rotatepdfFolderPath))
                         {
                             MessageBox.Show("請輸入欲旋轉PDF檔資料夾路徑!", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            return;
                         }
+                        string outputFolder = System.IO.Path.GetDirectoryName(rotatepdfFolderPath);
+                        Directory.CreateDirectory(System.IO.Path.Combine(outputFolder, "RotatePdf"));
+                        string outputFilePath = System.IO.Path.Combine(outputFolder, "RotatePdf", "RotateResult.pdf");
+                        string[] sortedPdfFiles = new string[1];
+                        sortedPdfFiles[0] = rotatepdfFolderPath;
+                        string selectedText = Angle.Text;
+                        int angle = Convert.ToInt32(selectedText.Replace("度", ""));
+                        DH.MergeOrRotatePdfFiles(sortedPdfFiles, outputFilePath, angle, false);
+                        Logger.WriteLog("旋轉PDF完成!", LogLevel.General, richTextBoxGeneral);
                         break;
                     }
                 case nameof(Save_Config):

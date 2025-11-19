@@ -43,38 +43,41 @@
                 <Grid>
                     <WrapPanel Orientation="Horizontal" Margin="76,14,79,192">
                         <Button x:Name="Open_MergePdf_Folder" Style="{StaticResource BaseButton}" Margin="50,0,0,0" FontSize="18"  Background="#FFE6F0FF" BorderThickness="0" Click="Main_Btn_Click">
-                            <Button.ToolTip>
+                            <Image x:Name="Open_MergePdf_Folder_Icon" Source="UI/Open Folder Path.png" Width="82" Height="76"/>
+                        </Button>
+                        <TextBox x:Name="MergePdf_Folder_Path" Style="{StaticResource BaseTextBox}" Tag="請輸入欲合併PDF檔資料夾路徑!" Margin="30,15,0,0" FontSize="12" Height="42" Width="590">
+                            <TextBox.ToolTip>
                                 <ToolTip Background="Transparent" Padding="0" BorderThickness="0" HasDropShadow="True">
                                     <Border Background="Gray" CornerRadius="10" Padding="8">
                                         <TextBlock FontSize="14" Foreground="#00FF66">開啟合併PDF資料夾路徑</TextBlock>
                                     </Border>
                                 </ToolTip>
-                            </Button.ToolTip>
-                            <Image x:Name="Open_MergePdf_Folder_Icon" Source="UI/Open Folder Path.png" Width="82" Height="76"/>
-                        </Button>
-                        <TextBox x:Name="MergePdf_Folder_Path" Style="{StaticResource BaseTextBox}" Tag="請輸入欲合併PDF檔資料夾路徑!" Margin="30,15,0,0" FontSize="12" Height="42" Width="590"/>
+                            </TextBox.ToolTip>
+                        </TextBox>
                         <Button x:Name="Open_SplitPdf_File" Style="{StaticResource BaseButton}" Margin="60,0,0,0" FontSize="18"  Background="#FFE6F0FF" BorderThickness="0" Click="Main_Btn_Click">
-                            <Button.ToolTip>
-                                <ToolTip Background="Transparent" Padding="0" BorderThickness="0" HasDropShadow="True">
-                                    <Border Background="Gray" CornerRadius="10" Padding="8">
-                                        <TextBlock FontSize="14" Foreground="#00FF66">開啟切割PDF檔案路徑</TextBlock>
-                                    </Border>
-                                </ToolTip>
-                            </Button.ToolTip>
                             <Image x:Name="Open_SplitPdf_Folder_Icon" Source="/UI/Open File Path.png" Width="82" Height="76"/>
                         </Button>
-                        <TextBox x:Name="SplitPdf_Folder_Path" Style="{StaticResource BaseTextBox}" Tag="請輸入欲分割PDF檔路徑!" Margin="20,0,0,0" FontSize="12" Height="42" Width="590"></TextBox>
+                        <TextBox x:Name="SplitPdf_Folder_Path" Style="{StaticResource BaseTextBox}" Tag="請輸入欲分割PDF檔路徑!" Margin="20,0,0,0" FontSize="12" Height="42" Width="590">
+                        <TextBox.ToolTip>
+                            <ToolTip Background="Transparent" Padding="0" BorderThickness="0" HasDropShadow="True">
+                                <Border Background="Gray" CornerRadius="10" Padding="8">
+                                    <TextBlock FontSize="14" Foreground="#00FF66">開啟切割PDF檔案路徑</TextBlock>
+                                </Border>
+                            </ToolTip>
+                        </TextBox.ToolTip>
+                        </TextBox>
                         <Button x:Name="Open_RotatePdf_File" Style="{StaticResource BaseButton}" Margin="60,0,0,0" FontSize="18"  Background="#FFE6F0FF" BorderThickness="0" Click="Main_Btn_Click">
-                            <Button.ToolTip>
-                                <ToolTip Background="Transparent" Padding="0" BorderThickness="0" HasDropShadow="True">
-                                    <Border Background="Gray" CornerRadius="10" Padding="8">
-                                        <TextBlock FontSize="14" Foreground="#00FF66">開啟旋轉PDF檔案路徑</TextBlock>
-                                    </Border>
-                                </ToolTip>
-                            </Button.ToolTip>
                             <Image x:Name="Open_RotatePdf_Folder_Icon" Source="/UI/Open File Path.png" Width="82" Height="76"/>
                         </Button>
-                        <TextBox x:Name="RotatePdf_Folder_Path" Style="{StaticResource BaseTextBox}" Tag="請輸入欲旋轉PDF檔路徑!" Margin="20,0,0,0" FontSize="12" Height="42" Width="590"></TextBox>
+                        <TextBox x:Name="RotatePdf_Folder_Path" Style="{StaticResource BaseTextBox}" Tag="請輸入欲旋轉PDF檔路徑!" Margin="20,0,0,0" FontSize="12" Height="42" Width="590">
+                        <TextBox.ToolTip>
+                            <ToolTip Background="Transparent" Padding="0" BorderThickness="0" HasDropShadow="True">
+                                <Border Background="Gray" CornerRadius="10" Padding="8">
+                                    <TextBlock FontSize="14" Foreground="#00FF66">開啟旋轉PDF檔案路徑</TextBlock>
+                                </Border>
+                            </ToolTip>
+                        </TextBox.ToolTip>
+                        </TextBox>
                     </WrapPanel>
                     <Button x:Name="Show_Printer" Style="{StaticResource CircleButton}" Margin="8,42,845,285" Content="顯示印表機" FontSize="18" Click="Main_Btn_Click"/>
                     <Button x:Name="Print" Style="{StaticResource CircleButton}" Margin="7,67,846,258" Content="列印" FontSize="18" Click="Main_Btn_Click"/>

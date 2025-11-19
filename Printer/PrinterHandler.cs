@@ -124,7 +124,7 @@ namespace Printer
                 // 將指定頁加入新的PDF
                 outputDocument.AddPage(inputDocument.Pages[idx]);
                 // 儲存
-                string outputFilename = Path.Combine(outputFolder, $"Page_{idx + 1}.pdf");
+                string outputFilename = Path.Combine(outputFolder, $"Guest_Project_Date{idx + 1}.pdf");
                 outputDocument.Save(outputFilename);
                 Console.WriteLine($"Saved: {outputFilename}");
             }

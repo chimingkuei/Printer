@@ -19,7 +19,6 @@ D:\Chimingkuei\repos\Printer\Printer\bin\x64\Debug\Xceed.Wpf.AvalonDock.Themes.A
 D:\Chimingkuei\repos\Printer\Printer\bin\x64\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll
 D:\Chimingkuei\repos\Printer\Printer\bin\x64\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
 D:\Chimingkuei\repos\Printer\Printer\bin\x64\Debug\Xceed.Wpf.Toolkit.dll
-D:\Chimingkuei\repos\Printer\Printer\bin\x64\Debug\netDxf.xml
 D:\Chimingkuei\repos\Printer\Printer\bin\x64\Debug\Newtonsoft.Json.xml
 D:\Chimingkuei\repos\Printer\Printer\bin\x64\Debug\OpenCvSharp.xml
 D:\Chimingkuei\repos\Printer\Printer\bin\x64\Debug\OpenCvSharp.Extensions.xml
@@ -83,7 +82,6 @@ D:\Chimingkuei\repos\Printer\Printer\bin\x64\Debug\PdfSharp.WPFonts.dll
 D:\Chimingkuei\repos\Printer\Printer\bin\x64\Debug\System.Diagnostics.DiagnosticSource.dll
 D:\Chimingkuei\repos\Printer\Printer\bin\x64\Debug\System.Security.Cryptography.Pkcs.dll
 D:\Chimingkuei\repos\Printer\Printer\bin\x64\Debug\System.Threading.Tasks.Extensions.dll
-D:\Chimingkuei\repos\Printer\Printer\bin\x64\Debug\BouncyCastle.Cryptography.dll
 D:\Chimingkuei\repos\Printer\Printer\bin\x64\Debug\Microsoft.Bcl.AsyncInterfaces.xml
 D:\Chimingkuei\repos\Printer\Printer\bin\x64\Debug\Microsoft.Extensions.DependencyInjection.xml
 D:\Chimingkuei\repos\Printer\Printer\bin\x64\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
@@ -111,4 +109,3 @@ D:\Chimingkuei\repos\Printer\Printer\bin\x64\Debug\PdfSharp.WPFonts.xml
 D:\Chimingkuei\repos\Printer\Printer\bin\x64\Debug\System.Diagnostics.DiagnosticSource.xml
 D:\Chimingkuei\repos\Printer\Printer\bin\x64\Debug\System.Security.Cryptography.Pkcs.xml
 D:\Chimingkuei\repos\Printer\Printer\bin\x64\Debug\System.Threading.Tasks.Extensions.xml
-D:\Chimingkuei\repos\Printer\Printer\bin\x64\Debug\BouncyCastle.Cryptography.xml
